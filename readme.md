@@ -160,10 +160,8 @@ lunar_RL/
 │   ├── compare.py               # 500-episode paired evaluation script
 │   ├── compare_training.py      # Multi-model evaluation utility
 │   ├── demo.py                  # Interactive visual demo with Pygame
-│   ├── diagnose.py              # Reward activation diagnostic script
 │   ├── evaluate_shaped.py       # Shaped model evaluation
 │   ├── evaluation.py            # Baseline evaluation script
-│   ├── test_cust_env.py         # Custom environment sanity test
 │   ├── validate_shaped.py       # Validation on novel seeds
 │   └── validate_tuned.py        # Tuned model validation on novel seeds
 ├── logs/
@@ -182,6 +180,10 @@ lunar_RL/
 │   ├── large_evaluation.csv     # Per-seed 500-episode evaluation logs
 │   ├── mean_reward_comparison.png
 │   └── success_rate_comparison.png
+├── training/
+│   ├── baseline.py              # Baseline PPO training pipeline
+│   ├── shape.py                 # Reward-shaped PPO training pipeline
+│   └── tuned.py                 # Tuned PPO training pipeline
 ├── .gitignore
 ├── requirements.txt             # Pinned project dependencies
 └── README.md
