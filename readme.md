@@ -62,25 +62,22 @@ During training of the reward-shaped agent, `CustomLunarLander` wraps `LunarLand
 
 ## 3. Results and Comparison
 
-### Primary Benchmark: 500-Episode Paired Evaluation
-The Tuned PPO and Reward-Shaped PPO checkpoints were evaluated side-by-side using `evaluation/compare.py` across **500 identical evaluation seeds (3000–3499)** in the original, unshaped `LunarLander-v3` environment:
+### Overall Performance Summary
+All models were evaluated in the original, unmodified **LunarLander-v3** environment without reward shaping applied during testing. An episode is counted as successful when its unshaped episode reward meets or exceeds the threshold of **$\ge 200$**.
 
-| Model | Evaluation Episodes | Mean Reward | Reward Std Dev | Successful Episodes ($\ge 200$) | Success Rate |
+| Model | Evaluation Episodes | Mean Reward | Reward Standard Deviation | Successful Episodes | Success Rate |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Baseline PPO** | 50 (seeds 1000–1049)* | 98.97 | 118.80 | 14 / 50 | 28.0% |
 | **Tuned PPO** | 500 (seeds 3000–3499) | 212.70 | 26.36 | 352 / 500 | 70.4% |
 | **Reward-Shaped PPO** | 500 (seeds 3000–3499) | **230.93** | 37.83 | **464 / 500** | **92.8%** |
 
-* **Paired Comparison:** On identical seeds, Reward-Shaped PPO achieved a $+18.23$ higher mean reward than Tuned PPO and scored higher on **471 out of 500 seeds (94.2% head-to-head win rate)**.
-* **Success Rate:** Successful landings increased by $+22.4\%$ absolute percentage points (reducing failure/crash events from 148 to 36).
+*\*Note on Evaluation Protocols: Tuned PPO and Reward-Shaped PPO were evaluated in an identical, side-by-side paired test across 500 seeds (3000–3499). Baseline PPO was evaluated in an earlier, independent 50-episode run (seeds 1000–1049) to document baseline instability, and is therefore not directly paired with the 500-seed benchmark.*
 
-### Baseline Evaluation (Separate 50-Episode Run)
-The initial Baseline PPO agent was evaluated in a separate run over 50 episodes (seeds 1000–1049) using `evaluation/evaluation.py`:
-
-| Model | Evaluation Episodes | Mean Reward | Reward Std Dev | Successful Episodes ($\ge 200$) | Success Rate |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Baseline PPO** | 50 (seeds 1000–1049) | 98.97 | 118.80 | 14 / 50 | 28.0% |
-
-*(Note: Baseline results reflect early validation on 50 episodes and are not directly paired with the 500-episode benchmark above.)*
+### Paired Comparison: Tuned PPO vs. Reward-Shaped PPO
+When evaluated head-to-head on the exact same 500 seeds (3000–3499) in the unmodified environment:
+* **Mean Reward Gain:** Reward-Shaped PPO achieved a **+18.23** higher mean reward (230.93 vs. 212.70).
+* **Success Rate Increase:** Success rate improved by **+22.4 percentage points** (92.8% vs. 70.4%), reducing crashes and timeouts from 148 down to 36.
+* **Head-to-Head Win Rate:** Reward-Shaped PPO scored higher than Tuned PPO on **471 out of 500 paired seeds (94.2%)**.
 
 ---
 
@@ -89,12 +86,12 @@ The initial Baseline PPO agent was evaluated in a separate run over 50 episodes 
 ### Mean Reward Comparison
 ![Mean Reward Comparison](results/mean_reward_comparison.png)
 
-*Figure 1: Mean unshaped reward across the 500-episode paired evaluation, showing an improvement from 212.70 to 230.93.*
+*Figure 1: Mean unshaped reward across the 500-episode paired evaluation in the unmodified LunarLander-v3 environment.*
 
 ### Success Rate Comparison
 ![Success Rate Comparison](results/success_rate_comparison.png)
 
-*Figure 2: Percentage of landing episodes reaching or exceeding the success threshold ($\ge 200$), increasing from 70.4% to 92.8%.*
+*Figure 2: Percentage of landing episodes reaching or exceeding the success threshold ($\ge 200$) across the 500 paired test seeds.*
 
 ---
 
