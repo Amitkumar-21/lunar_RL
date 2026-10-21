@@ -99,7 +99,11 @@ When evaluated head-to-head on the exact same 500 seeds (3000–3499) in the unm
 
 The visual demonstration script runs the trained agent in real-time with Pygame rendering enabled (`render_mode="human"`):
 
-<!-- DEMO VIDEO / GIF PLACEHOLDER: Add recorded landing demonstration MP4/GIF here -->
+<p align="center">
+  <img src="assets/demogif.gif" alt="Lunar Lander Visual Demo" width="600"/>
+</p>
+
+*Figure 3: Autonomous landing demonstration showing controlled descent, attitude correction, and soft touchdown.*
 
 The agent exhibits controlled vertical deceleration, active counter-thrusting to nullify horizontal drift, and soft dual-leg contact within the landing perimeter.
 
@@ -151,6 +155,8 @@ python -m evaluation.demo
 
 ```
 lunar_RL/
+├── assets/
+│   └── demogif.gif              # Autonomous landing demonstration GIF
 ├── environment/
 │   └── custom_lander.py         # Gymnasium reward shaping wrapper
 ├── evaluation/
